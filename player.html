@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Player</title>
+  </head>
+<body>
+  <script>
+    var wsAddress = document.location.origin.replace(/.+?\:\/\//, 'ws://');
+    var ws = new WebSocket(wsAddress + '/player');
+    ws.onmessage = onWsMessage;
+    ws.onopen = onWsOpen;
+
+    function onWsOpen() {
+      console.log('Connected');
+    }
+
+    function onWsMessage(msg) {
+      console.log(msg.data);
+    }
+  </script>
+</body>
+</html>

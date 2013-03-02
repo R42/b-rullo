@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Controller</title>
+    <style>
+      html {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      var wsAddress = document.location.origin.replace(/.+?\:\/\//, 'ws://');
+      var ws = new WebSocket(wsAddress);
+      ws.onopen = onWsOpen;
+
+      function onWsOpen() {
+        console.log('Connected');
+      }
+
+      var NUMBER_OF_SOUNDS = 5;
+      var idx = Math.floor(Math.random() * NUMBER_OF_SOUNDS);
+      function play() {
+        ws.send(idx);
+      }
+      console.log('Using sound: %d', idx);
+
+      document.addEventListener('click', play);
+      document.addEventListener('touch', play);
+
+      // random color bg
+      var letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+      for(var i=9; i>=0; --i)
+        letters.unshift(new String(i));
+
+      function getRandomColor() {
+        var color = '#';
+        color += letters[Math.floor(Math.random() * letters.length)];
+        color += letters[Math.floor(Math.random() * letters.length)];
+        color += letters[Math.floor(Math.random() * letters.length)];
+        return color;
+      }
+
+      document.bgColor = getRandomColor();
+    </script>
+  </body>
+</html>
