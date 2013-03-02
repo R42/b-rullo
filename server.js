@@ -9,7 +9,6 @@ var playerPath = 'player.html';
 var players = [];
 
 function requestListener(req, res){
-  console.log(req.url);
   if (~req.url.indexOf('player'))
     fs.createReadStream(path.join(__dirname, playerPath)).pipe(res);
   else
@@ -33,8 +32,6 @@ function onPlayerClose() {
 }
 
 function onControllerMessage(message) {
-  console.log('Msg from controller: "%s"', message);
-
   var i;
   for (i=0; i<players.length; ++i)
     players[i].send(message);
