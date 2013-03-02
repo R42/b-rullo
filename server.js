@@ -11,6 +11,8 @@ var players = [];
 function requestListener(req, res){
   if (~req.url.indexOf('player'))
     fs.createReadStream(path.join(__dirname, playerPath)).pipe(res);
+  else if (~req.url.indexOf('mp3'))
+    fs.createReadStream(path.join(__dirname, req.url)).pipe(res);
   else
     fs.createReadStream(path.join(__dirname, controllerPath)).pipe(res);
 }
